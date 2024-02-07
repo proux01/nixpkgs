@@ -75,6 +75,7 @@ let
       itauto = callPackage ../development/coq-modules/itauto { };
       ITree = callPackage ../development/coq-modules/ITree { };
       LibHyps = callPackage ../development/coq-modules/LibHyps {};
+      libvalidsdp = callPackage ../development/coq-modules/libvalidsdp {};
       ltac2 = callPackage ../development/coq-modules/ltac2 {};
       math-classes = callPackage ../development/coq-modules/math-classes { };
       mathcomp = callPackage ../development/coq-modules/mathcomp {};
@@ -122,6 +123,7 @@ let
       tlc = callPackage ../development/coq-modules/tlc {};
       topology = callPackage ../development/coq-modules/topology {};
       trakt = callPackage ../development/coq-modules/trakt {};
+      validsdp = callPackage ../development/coq-modules/validsdp {};
       vcfloat = callPackage ../development/coq-modules/vcfloat {};
       Velisarios = callPackage ../development/coq-modules/Velisarios {};
       Verdi = callPackage ../development/coq-modules/Verdi {};
