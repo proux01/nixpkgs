@@ -19,6 +19,7 @@ let
   owner = "math-comp";
   withDoc = single && (args.withDoc or false);
   defaultVersion = with versions; lib.switch coq.coq-version [
+      { case = range "8.16" "8.19"; out = "2.2.0"; }
       { case = range "8.19" "8.19"; out = "1.19.0"; }
       { case = range "8.17" "8.18"; out = "1.18.0"; }
       { case = range "8.15" "8.18"; out = "1.17.0"; }
