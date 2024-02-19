@@ -8,9 +8,11 @@ mkCoqDerivation {
   release."1.1".sha256 = "sha256-JmrtM9WcT8Bfy0WZCw8xdubuMomyXmfLXJwpnCNrvsg=";
   release."1.2".sha256 = "sha256-YQRtK2MjjsMlytdu9iutUDKhwOo4yWrSwhyBb2zNHoE=";
   release."1.2+8.13".sha256 = "sha256-hozms4sPSMr4lFkJ20x+uW9Wqt067bifnPQxdGyKhQQ=";
+  release."1.2c".sha256 = "";
 
   inherit version;
   defaultVersion = with lib.versions; lib.switch [ coq.version ] [
+    { cases = [ (range "8.18" "8.19") ]; out = "1.2c"; }
     { cases = [ (range "8.15" "8.17") ]; out = "1.2"; }
     { cases = [ (isEq "8.13") ]; out = "1.2+8.13"; }
     { cases = [ (range "8.13" "8.17") ]; out = "1.1"; }
