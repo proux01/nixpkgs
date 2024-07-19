@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "InfSeqExt";
@@ -12,4 +12,6 @@ mkCoqDerivation {
   release."20230107".sha256 = "sha256-YMBzVIsLkIC+w2TeyHrKe29eWLIxrH3wIMZqhik8p9I=";
   release."20200131".rev    = "203d4c20211d6b17741f1fdca46dbc091f5e961a";
   release."20200131".sha256 = "0xylkdmb2dqnnqinf3pigz4mf4zmczcbpjnn59g5g76m7f2cqxl0";
+
+  propagatedBuildInputs = [ stdlib ];
 }

@@ -1,4 +1,4 @@
-{ lib, pkgs, mkCoqDerivation, coq, veriT, zchaff, fetchurl, cvc5, version ? null }:
+{ lib, pkgs, mkCoqDerivation, coq, veriT, zchaff, fetchurl, cvc5, stdlib, version ? null }:
 
 let
   # version of veriT that works with SMTCoq
@@ -42,7 +42,7 @@ mkCoqDerivation {
     { case = isEq "8.13"; out = "SMTCoq-2.2+8.13"; }
   ] null;
 
-  propagatedBuildInputs = [ cvc5 veriT' zchaff ] ++ (with coq.ocamlPackages; [ findlib num zarith ]);
+  propagatedBuildInputs = [ cvc5 veriT' zchaff stdlib ] ++ (with coq.ocamlPackages; [ findlib num zarith ]);
   mlPlugin = true;
   nativeBuildInputs = (with pkgs; [ gnumake42 ]) ++ (with coq.ocamlPackages; [ ocamlbuild ]);
 

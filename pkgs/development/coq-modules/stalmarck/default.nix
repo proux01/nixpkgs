@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 let
   repo = "stalmarck";
@@ -16,7 +16,7 @@ let
     pname = package;
     istac = package == "stalmarck-tactic";
     propagatedBuildInputs =
-      lib.optional istac (stalmarck_ "stalmarck");
+      if istac then [ (stalmarck_ "stalmarck") ] else [ stdlib ];
     description =
       if istac then
         "Coq tactic and verified tool for proving tautologies using Stålmarck's algorithm"

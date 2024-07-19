@@ -1,4 +1,4 @@
-{ lib, bash, autoconf, mkCoqDerivation, coq, version ? null }:
+{ lib, bash, autoconf, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "flocq";
@@ -27,6 +27,8 @@ mkCoqDerivation {
   nativeBuildInputs = [ bash autoconf ];
   mlPlugin = true;
   useMelquiondRemake.logpath = "Flocq";
+
+  propagatedBuildInputs = [ stdlib ];
 
   meta = with lib; {
     description = "Floating-point formalization for the Coq system";

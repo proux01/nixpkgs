@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "aac-tactics";
@@ -44,6 +44,8 @@ mkCoqDerivation {
   ] null;
 
   mlPlugin = true;
+
+  propagatedBuildInputs = [ stdlib ];
 
   meta = with lib; {
     description = "Coq plugin providing tactics for rewriting universally quantified equations";

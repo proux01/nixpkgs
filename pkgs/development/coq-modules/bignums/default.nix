@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "bignums";
@@ -33,6 +33,8 @@ mkCoqDerivation {
   releaseRev = v: "${if lib.versions.isGe "9.0" v then "v" else "V"}${v}";
 
   mlPlugin = true;
+
+  propagatedBuildInputs = [ stdlib ];
 
   meta = { license = lib.licenses.lgpl2; };
 }

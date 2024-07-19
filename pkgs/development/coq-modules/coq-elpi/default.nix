@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, which, coq, version ? null }:
+{ lib, mkCoqDerivation, which, coq, stdlib, version ? null }:
 
 let
   elpi = coq.ocamlPackages.elpi.override (lib.switch coq.coq-version [
@@ -71,7 +71,7 @@ in (mkCoqDerivation {
 
   mlPlugin = true;
   useDuneifVersion = v: lib.versions.isGe "2.2.0" v || v == "dev";
-  propagatedBuildInputs = [ coq.ocamlPackages.findlib elpi ];
+  propagatedBuildInputs = [ coq.ocamlPackages.findlib elpi stdlib ];
 
   meta = {
     description = "Coq plugin embedding ELPI";

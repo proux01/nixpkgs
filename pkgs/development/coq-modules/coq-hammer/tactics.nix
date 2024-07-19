@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 let
   owner = "lukaszcz";
@@ -29,6 +29,8 @@ mkCoqDerivation {
   passthru = {
     inherit owner repo defaultVersion release releaseRev;
   };
+
+  propagatedBuildInputs = [ stdlib ];
 
   mlPlugin = true;
 

@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "paco";
@@ -17,6 +17,8 @@ mkCoqDerivation {
   release."4.0.2".sha256 = "1q96bsxclqx84xn5vkid501jkwlc1p6fhb8szrlrp82zglj58b0b";
   release."1.2.8".sha256 = "05fskx5x1qgaf9qv626m38y5izichzzqc7g2rglzrkygbskrrwsb";
   releaseRev = v: "v${v}";
+
+  propagatedBuildInputs = [ stdlib ];
 
   preBuild = "cd src";
 

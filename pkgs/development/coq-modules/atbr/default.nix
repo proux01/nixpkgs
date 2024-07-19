@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 mkCoqDerivation {
   pname = "atbr";
@@ -11,6 +11,8 @@ mkCoqDerivation {
     "8.20.0".sha256  = "sha256-Okhtq6Gnq4HA3tEZJvf8JBnmk3OKdm6hC1qINmoShmo=";
   };
   releaseRev = v: "v${v}";
+
+  propagatedBuildInputs = [ stdlib ];
 
   mlPlugin = true;
 

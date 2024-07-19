@@ -1,4 +1,4 @@
-{ lib, mkCoqDerivation, coq, version ? null }:
+{ lib, mkCoqDerivation, coq, stdlib, version ? null }:
 
 (mkCoqDerivation {
   pname = "equations";
@@ -68,6 +68,8 @@
     release."1.3.1+8.20".sha256       = "sha256-u8LB1KiACM5zVaoL7dSdHYvZgX7pf30VuqtjLLGuTzc=";
 
   mlPlugin = true;
+
+  propagatedBuildInputs = [ stdlib ];
 
   meta = with lib; {
     homepage = "https://mattam82.github.io/Coq-Equations/";

@@ -1,4 +1,4 @@
-{ lib, callPackage, mkCoqDerivation, coq, version ? null }:
+{ lib, callPackage, mkCoqDerivation, coq, stdlib, version ? null }:
 
 (mkCoqDerivation rec {
   pname = "itauto";
@@ -31,6 +31,8 @@
 
   passthru.tests.suite = callPackage ./test.nix {};
 
+  propagatedBuildInputs = [ stdlib ];
+
   meta =  with lib; {
     description = "Reflexive SAT solver parameterised by a leaf tactic and Nelson-Oppen support";
     maintainers = with maintainers; [ siraben ];
@@ -38,7 +40,7 @@
   };
 }).overrideAttrs (o: lib.optionalAttrs
   (o.version == "dev" || lib.versionAtLeast o.version "8.16") {
-    propagatedBuildInputs = [ coq.ocamlPackages.findlib ];
+    propagatedBuildInputs = [ stdlib coq.ocamlPackages.findlib ];
 } // lib.optionalAttrs
   (o.version == "dev" || lib.versionAtLeast o.version "8.18") {
     nativeBuildInputs = with coq.ocamlPackages; [ ocaml findlib dune_3 ];
