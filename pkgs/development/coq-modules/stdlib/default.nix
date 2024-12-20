@@ -3,7 +3,7 @@
   mkCoqDerivation,
   lib,
   version ? null,
-}@args:
+}:
 (mkCoqDerivation {
 
   pname = "stdlib";
@@ -19,11 +19,11 @@
       [
         {
           cases = [ (isLt "8.21") ];
-          out = "8.20";
+          out = "master";
         }
       ]
-      null;
-  releaseRev = v: "v${v}";
+      "master";
+/*  releaseRev = v: "v${v}"; */
 
   release."8.20".sha256 = "sha256-AcoS4edUYCfJME1wx8UbuSQRF3jmxhArcZyPIoXcfu0=";
 

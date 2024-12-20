@@ -21,7 +21,7 @@ mkCoqDerivation {
         case = range "8.6" "8.17";
         out = "${coq.coq-version}.0";
       }
-    ] null;
+    ] "master";
 
   release."9.0.0+coq8.20".sha256 = "sha256-pkvyDaMXRalc6Uu1eBTuiqTpRauRrzu946c6TavyTKY=";
   release."9.0.0+coq8.19".sha256 = "sha256-02uL+qWbUveHe67zKfc8w3U0iN3X2DKBsvP3pKpW8KQ=";
@@ -44,7 +44,7 @@ mkCoqDerivation {
   release."8.7.0".sha256 = "11c4sdmpd3l6jjl4v6k213z9fhrmmm1xnly3zmzam1wrrdif4ghl";
   release."8.6.0".rev = "v8.6.0";
   release."8.6.0".sha256 = "0553pcsy21cyhmns6k9qggzb67az8kl31d0lwlnz08bsqswigzrj";
-  releaseRev = v: "${if lib.versions.isGe "9.0" v then "v" else "V"}${v}";
+/*  releaseRev = v: "${if lib.versions.isGe "9.0" v then "v" else "V"}${v}"; */
 
   mlPlugin = true;
 

@@ -24,9 +24,9 @@ let
       autosubst = callPackage ../development/coq-modules/autosubst {};
       autosubst-ocaml = callPackage ../development/coq-modules/autosubst-ocaml {};
       bbv = callPackage ../development/coq-modules/bbv {};
-      bignums = if lib.versionAtLeast coq.coq-version "8.6"
-        then callPackage ../development/coq-modules/bignums {}
-        else null;
+      bignums = /* if lib.versionAtLeast coq.coq-version "8.6"
+        then */ callPackage ../development/coq-modules/bignums {}
+        /* else null */ ;
       category-theory = callPackage ../development/coq-modules/category-theory { };
       ceres = callPackage ../development/coq-modules/ceres {};
       Cheerios = callPackage ../development/coq-modules/Cheerios {};
@@ -236,14 +236,12 @@ in rec {
   coq_8_19 = mkCoq "8.19" null;
   coq_8_20 = mkCoq "8.20" null;
 
-  /* uncomment this for Rocq 9.0+rc1
   inherit (callPackage ./rocq-packages.nix {
     inherit ocamlPackages_4_14
     ;
-  }) rocqPackages_9_0
-  ;
+  }) rocqPackages_dev;
 
-  coq_dev  = mkCoq "9.0+rc1" rocqPackages_9_0; */
+  coq_dev  = mkCoq "master" rocqPackages_dev;
 
   coqPackages_8_5 = mkCoqPackages coq_8_5;
   coqPackages_8_6 = mkCoqPackages coq_8_6;
@@ -261,6 +259,7 @@ in rec {
   coqPackages_8_18 = mkCoqPackages coq_8_18;
   coqPackages_8_19 = mkCoqPackages coq_8_19;
   coqPackages_8_20 = mkCoqPackages coq_8_20;
+  coqPackages_dev = mkCoqPackages coq_dev;
 
   coqPackages = recurseIntoAttrs coqPackages_8_20;
   coq = coqPackages.coq;
