@@ -3,11 +3,11 @@
   mkCoqDerivation,
   lib,
   version ? null,
-}@args:
+}:
 (mkCoqDerivation {
 
   pname = "stdlib";
-  repo = "coq";
+  repo = "stdlib";
   owner = "coq";
   opam-name = "coq-stdlib";
 
@@ -30,16 +30,15 @@
   useDune = true;
 
   configurePhase = ''
-    patchShebangs stdlib/dev/with-rocq-wrap.sh
+    patchShebangs dev/with-rocq-wrap.sh
   ''; # don't run Coq's configure
 
   buildPhase = ''
-    cd stdlib
-    dev/with-rocq-wrap.sh dune build -p coq-stdlib @install ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
+    dev/with-rocq-wrap.sh dune build -p rocq-stdlib @install ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
   '';
 
   installPhase = ''
-    dev/with-rocq-wrap.sh dune install --root . coq-stdlib --prefix=$out --libdir $OCAMLFIND_DESTDIR
+    dev/with-rocq-wrap.sh dune install rocq-stdlib --prefix=$out --libdir $OCAMLFIND_DESTDIR
     mkdir $out/lib/coq/
     mv $OCAMLFIND_DESTDIR/coq $out/lib/coq/${coq.coq-version}
   '';
