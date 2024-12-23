@@ -13,6 +13,7 @@
 , buildIde ? null # default is true for Coq < 8.14 and false for Coq >= 8.14
 , glib, adwaita-icon-theme, wrapGAppsHook3, makeDesktopItem, copyDesktopItems
 , csdp ? null
+, rocq  # for versions >= 9.0 that are transition shims on top of Rocq
 , version, coq-version ? null
 }@args:
 let
@@ -235,13 +236,12 @@ if coqAtLeast "8.21" then self.overrideAttrs(_: {
   # coq-core is now a shim for rocq
   buildPhase = ''
     runHook preBuild
-    make dunestrap
-    dune build -p rocq-runtime,rocq-core,coq-core,coqide-server${lib.optionalString buildIde ",rocqide"} -j $NIX_BUILD_CORES
+    dune build -p coq-core,coqide-server${lib.optionalString buildIde ",rocqide"} -j $NIX_BUILD_CORES
     runHook postBuild
   '';
   installPhase = ''
     runHook preInstall
-    dune install --prefix $out rocq-runtime rocq-core coq-core coqide-server${lib.optionalString buildIde " rocqide"}
+    dune install --prefix $out coq-core coqide-server${lib.optionalString buildIde " rocqide"}
     runHook postInstall
   '';
 }) else if coqAtLeast "8.17" then self.overrideAttrs(_: {

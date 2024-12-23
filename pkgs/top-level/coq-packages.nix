@@ -196,7 +196,7 @@ let
               else v))
       ) (lib.attrNames set)
     );
-  mkCoq = version: callPackage ../applications/science/logic/coq {
+  mkCoq = version: rocqPackages: callPackage ../applications/science/logic/coq {
     inherit version
       ocamlPackages_4_05
       ocamlPackages_4_09
@@ -204,7 +204,7 @@ let
       ocamlPackages_4_12
       ocamlPackages_4_14
     ;
-  };
+  } // { inherit rocqPackages; };
 in rec {
 
   /* The function `mkCoqPackages` takes as input a derivation for Coq and produces
@@ -219,22 +219,31 @@ in rec {
     let self = lib.makeScope newScope (lib.flip mkCoqPackages' coq); in
     self.filterPackages (! coq.dontFilter or false);
 
-  coq_8_5  = mkCoq "8.5";
-  coq_8_6  = mkCoq "8.6";
-  coq_8_7  = mkCoq "8.7";
-  coq_8_8  = mkCoq "8.8";
-  coq_8_9  = mkCoq "8.9";
-  coq_8_10 = mkCoq "8.10";
-  coq_8_11 = mkCoq "8.11";
-  coq_8_12 = mkCoq "8.12";
-  coq_8_13 = mkCoq "8.13";
-  coq_8_14 = mkCoq "8.14";
-  coq_8_15 = mkCoq "8.15";
-  coq_8_16 = mkCoq "8.16";
-  coq_8_17 = mkCoq "8.17";
-  coq_8_18 = mkCoq "8.18";
-  coq_8_19 = mkCoq "8.19";
-  coq_8_20 = mkCoq "8.20";
+  coq_8_5  = mkCoq "8.5" null;
+  coq_8_6  = mkCoq "8.6" null;
+  coq_8_7  = mkCoq "8.7" null;
+  coq_8_8  = mkCoq "8.8" null;
+  coq_8_9  = mkCoq "8.9" null;
+  coq_8_10 = mkCoq "8.10" null;
+  coq_8_11 = mkCoq "8.11" null;
+  coq_8_12 = mkCoq "8.12" null;
+  coq_8_13 = mkCoq "8.13" null;
+  coq_8_14 = mkCoq "8.14" null;
+  coq_8_15 = mkCoq "8.15" null;
+  coq_8_16 = mkCoq "8.16" null;
+  coq_8_17 = mkCoq "8.17" null;
+  coq_8_18 = mkCoq "8.18" null;
+  coq_8_19 = mkCoq "8.19" null;
+  coq_8_20 = mkCoq "8.20" null;
+
+  /* uncomment this for Rocq 9.0+rc1
+  inherit (callPackage ./rocq-packages.nix {
+    inherit ocamlPackages_4_14
+    ;
+  }) rocqPackages_9_0
+  ;
+
+  coq_dev  = mkCoq "9.0+rc1" rocqPackages_9_0; */
 
   coqPackages_8_5 = mkCoqPackages coq_8_5;
   coqPackages_8_6 = mkCoqPackages coq_8_6;
