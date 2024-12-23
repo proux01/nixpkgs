@@ -17178,6 +17178,15 @@ with pkgs;
     coqPackages      coq
   ;
 
+  inherit (callPackage ./rocq-packages.nix {
+    inherit (ocaml-ng)
+      ocamlPackages_4_14
+    ;
+  }) mkRocqPackages
+    rocqPackages_dev rocq_dev
+    rocqPackages     rocq
+  ;
+
   coq-kernel = callPackage ../applications/editors/jupyter-kernels/coq { };
 
   cubicle = callPackage ../applications/science/logic/cubicle {
