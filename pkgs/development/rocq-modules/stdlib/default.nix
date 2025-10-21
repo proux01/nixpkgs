@@ -2,6 +2,7 @@
   rocq-core,
   mkRocqDerivation,
   lib,
+  micromega-plugin,
   version ? null,
 }:
 
@@ -32,6 +33,8 @@ let
 
     mlPlugin = true;
 
+    propagatedBuildInputs = [ ];
+
     meta = {
       description = "Rocq Proof Assistant -- Standard Library";
       license = lib.licenses.lgpl21Only;
@@ -39,7 +42,7 @@ let
 
   };
   # the < 9.0 above is artificial as stdlib was included in Coq before
-  patched-derivation = derivation.overrideAttrs (
+  patched-derivation1 = derivation.overrideAttrs (
     o:
     lib.optionalAttrs
       (rocq-core.rocq-version != "dev" && lib.versions.isLe "8.20" rocq-core.rocq-version)
@@ -57,5 +60,12 @@ let
         '';
       }
   );
+  patched-derivation2 = patched-derivation1.overrideAttrs (
+    o:
+    lib.optionalAttrs (o.version != null && (o.version == "dev" || lib.versions.isGe "9.3.0" o.version))
+      {
+        propagatedBuildInputs = o.propagatedBuildInputs ++ [ micromega-plugin ];
+      }
+  );
 in
-patched-derivation
+patched-derivation2
